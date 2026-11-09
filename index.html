@@ -1,1177 +1,260 @@
 <!DOCTYPE html>
 <html lang="ms">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sistem Tempahan Perkhidmatan di Pusat Islam USIM</title>
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- FontAwesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- Google Fonts Inter -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  
-  <style>
-    body {
-      font-family: 'Inter', sans-serif;
-    }
-    .modal-backdrop {
-      background-color: rgba(15, 23, 42, 0.7);
-      backdrop-filter: blur(4px);
-    }
-    .pattern-bg {
-      background-color: #064e3b;
-      background-image: radial-gradient(#059669 0.75px, transparent 0.75px), radial-gradient(#059669 0.75px, #064e3b 0.75px);
-      background-size: 30px 30px;
-      background-position: 0 0, 15px 15px;
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sistem Tempahan Perkhidmatan di Pusat Islam</title>
+<style>
+:root{color-scheme:dark;--bg:#0a1428;--card:#111f3d;--tx:#e8eefc;--mut:#9fb2d6;--pri:#5b9bff;--pri2:#2559c0;--bd:#23375f;--err:#ff8a8a;--ov:rgba(3,8,20,.72);
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+
+
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:radial-gradient(900px 520px at 12% -4%,rgba(59,130,246,.30),transparent 62%),radial-gradient(800px 520px at 100% 35%,rgba(99,102,241,.20),transparent 62%),var(--pat),linear-gradient(180deg,#0a1428,#060d1d);background-attachment:fixed;color:var(--tx);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.5}
+header{background:linear-gradient(135deg,#0b1f4d,#1d4ed8);color:#fff;text-align:center;padding:40px 20px 48px}
+header .ic{font-size:40px}
+header h1{margin:8px auto 6px;font-size:clamp(22px,5vw,32px);max-width:700px;line-height:1.25}
+header p{margin:0;opacity:.9}
+main{max-width:960px;margin:-24px auto 40px;padding:0 16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.svc{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:22px;text-align:center;cursor:pointer;font:inherit;color:inherit;transition:transform .15s,box-shadow .15s}
+.svc:hover,.svc:focus-visible{transform:translateY(-3px);box-shadow:0 8px 20px rgba(0,0,0,.12);outline:2px solid var(--pri)}
+.svc .e{font-size:32px}.svc h2{margin:8px 0 12px;font-size:18px}.svc p{margin:0 0 12px;color:var(--mut);font-size:14px}
+.svc span{color:var(--pri);font-weight:600;font-size:14px}
+.note{margin-top:24px;text-align:center;color:var(--mut);font-size:13px}
+.ov{position:fixed;inset:0;background:var(--ov);display:none;align-items:center;justify-content:center;padding:16px;z-index:20}
+.ov.on{display:flex}
+.md{background:var(--card);border-radius:18px;width:100%;max-width:440px;max-height:92vh;overflow:auto;padding:24px;border:1px solid var(--bd)}
+.md h3{margin:0 0 4px;font-size:20px}.md .sub{color:var(--mut);font-size:14px;margin:0 0 16px}
+label{display:block;font-weight:600;font-size:14px;margin:12px 0 4px}
+label i{color:var(--err);font-style:normal}
+input{width:100%;padding:11px 12px;border:1px solid var(--bd);border-radius:10px;font:inherit;background:var(--bg);color:var(--tx)}
+input:focus{outline:2px solid var(--pri);border-color:transparent}
+input.bad{border-color:var(--err)}
+.er{color:var(--err);font-size:12px;min-height:16px;margin-top:2px}
+.row{display:flex;gap:10px;margin-top:20px}
+.btn{flex:1;padding:12px;border-radius:10px;border:1px solid var(--bd);font:inherit;font-weight:600;cursor:pointer;background:transparent;color:var(--tx)}
+.btn.p{background:var(--pri);border-color:var(--pri);color:#fff}.btn.p:hover{background:var(--pri2)}
+.btn:disabled{opacity:.6;cursor:wait}
+dl{margin:0;border:1px solid var(--bd);border-radius:12px;overflow:hidden}
+dl div{display:flex;justify-content:space-between;gap:12px;padding:11px 14px;border-bottom:1px solid var(--bd)}
+dl div:last-child{border:0}dt{color:var(--mut);font-size:14px}dd{margin:0;font-weight:600;text-align:right}
+.ok{text-align:center}.ok .e{font-size:52px}
+.warn{background:rgba(230,160,30,.15);border-radius:10px;padding:10px 12px;font-size:13px;margin-top:12px}
+.cal{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:20px;margin-top:28px}
+.cal h2{margin:0 0 4px;font-size:20px}.cal .s2{margin:0 0 14px;color:var(--mut);font-size:14px}
+select{padding:10px 12px;border:1px solid var(--bd);border-radius:10px;font:inherit;background:var(--bg);color:var(--tx);max-width:100%}
+.cbar{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center;margin-bottom:12px}
+.cnav{display:flex;align-items:center;gap:10px}.cnav button{width:36px;height:36px;border-radius:10px;border:1px solid var(--bd);background:transparent;color:var(--tx);font-size:18px;cursor:pointer}
+.cnav strong{min-width:130px;text-align:center}
+.cg{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
+.wd{text-align:center;font-size:12px;color:var(--mut);padding:4px 0}
+.dy{border:1px solid var(--bd);border-radius:8px;background:rgba(52,211,153,.14);color:var(--tx);font:inherit;padding:6px 2px;min-height:54px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px}
+.dy b{font-size:14px}.dy small{font-size:10px;color:var(--mut);line-height:1.1}
+.dy.has{background:rgba(230,160,30,.28)}.dy.past{opacity:.45}.dy.tdy{border-color:var(--pri);border-width:2px}.dy.sel{outline:2px solid var(--pri)}
+.leg{display:flex;flex-wrap:wrap;gap:14px;margin-top:12px;font-size:12px;color:var(--mut)}.leg i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:5px;vertical-align:-2px;border:1px solid var(--bd)}
+.det{margin-top:14px;padding:14px;border:1px solid var(--bd);border-radius:12px;font-size:14px}
+.det ul{margin:8px 0;padding-left:18px}.det .btn{flex:none;margin-top:8px;padding:10px 16px}
+textarea{width:100%;padding:11px 12px;border:1px solid var(--bd);border-radius:10px;font:inherit;background:var(--bg);color:var(--tx);resize:vertical}
+textarea:focus{outline:2px solid var(--pri);border-color:transparent}select.bad{border-color:var(--err)}
+dd{white-space:pre-wrap;word-break:break-word}
+.btn.p{background:#2f6fe0;border-color:#2f6fe0}.btn.p:hover{background:#2559c0}
+.svc:hover,.svc:focus-visible{box-shadow:0 8px 24px rgba(0,0,0,.45)}
+:root{--pat:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke='%235b9bff' stroke-opacity='.11'%3E%3Crect x='20' y='20' width='40' height='40'/%3E%3Crect x='20' y='20' width='40' height='40' transform='rotate(45 40 40)'/%3E%3Ccircle cx='40' cy='40' r='7'/%3E%3C/g%3E%3C/svg%3E")}
+header{position:relative;overflow:hidden;background-image:radial-gradient(500px 260px at 85% 0%,rgba(255,214,120,.22),transparent 65%),var(--pat),linear-gradient(135deg,#0b1f4d,#1d4ed8);border-bottom:1px solid rgba(120,160,255,.35)}
+header::before{content:"";position:absolute;right:6%;top:22px;width:84px;height:84px;border-radius:50%;box-shadow:inset -17px 6px 0 0 #f6d77c;opacity:.9;filter:drop-shadow(0 0 14px rgba(246,215,124,.55))}
+header>*{position:relative;z-index:1}
+.svc,.cal{background:linear-gradient(160deg,rgba(24,42,84,.93),rgba(13,26,56,.93));backdrop-filter:blur(4px)}
+.svc:hover,.svc:focus-visible{border-color:var(--pri)}
+@media (max-width:520px){header::before{width:52px;height:52px;right:5%;top:14px;box-shadow:inset -10px 4px 0 0 #f6d77c}}
+html{-webkit-text-size-adjust:100%}button,select,input,textarea{touch-action:manipulation}.svc,.dy{-webkit-tap-highlight-color:transparent}
+@keyframes up{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
+@media (max-width:600px){
+header{padding:26px 16px 38px}header h1{font-size:21px}header p{font-size:14px}
+main{padding:0 12px;margin-top:-18px}
+.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.svc{padding:16px 8px;min-height:130px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.svc .e{font-size:32px}.svc h2{font-size:15px;margin:6px 0 8px;line-height:1.3}.svc span{font-size:12px}
+.ov{align-items:flex-end;padding:0}
+.md{max-width:none;border-radius:20px 20px 0 0;max-height:92vh;max-height:92dvh;padding:20px 16px calc(16px + env(safe-area-inset-bottom,0px));animation:up .22s ease-out}
+.md h3{font-size:18px}
+.row{position:sticky;bottom:-1px;background:var(--card);padding:12px 0 2px;margin-top:12px}
+.btn{padding:14px;font-size:16px}
+input,select,textarea{min-height:46px;font-size:16px}
+textarea{min-height:80px}
+.cal{padding:14px 10px;margin-top:20px}.cal h2{font-size:18px}
+.cbar{flex-direction:column;align-items:stretch}.cbar select{width:100%}
+.cnav{justify-content:space-between}.cnav button{width:44px;height:44px}
+.cg{gap:3px}.dy{min-height:46px;padding:4px 1px;border-radius:6px}.dy b{font-size:15px}.dy small{font-size:11px;font-weight:700}
+.dy small .tx{display:none}
+.leg{gap:10px}
+.det{padding:12px}.det .btn{width:100%}
+dl div{flex-direction:column;gap:2px}dd{text-align:left}
+}
+</style>
 </head>
-<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between">
+<body>
+<header>
+  <div class="ic">🕌</div>
+  <h1>Sistem Tempahan Perkhidmatan di Pusat Islam</h1>
+  <p>Pilih perkhidmatan di bawah untuk membuat tempahan</p>
+</header>
+<main>
+  <div class="grid" id="grid"></div>
+  <section class="cal" aria-label="Kalendar tempahan">
+    <h2>📅 Kalendar Tempahan</h2><p class="s2">Semak tarikh yang telah ditempah dan kekosongan.</p>
+    <div class="cbar"><select id="cFilt" aria-label="Tapis perkhidmatan"></select>
+      <div class="cnav"><button id="cPrev" aria-label="Bulan sebelum">‹</button><strong id="cTit"></strong><button id="cNext" aria-label="Bulan seterusnya">›</button></div></div>
+    <div class="cg" id="cGrid"></div>
+    <div class="leg"><span><i style="background:rgba(52,211,153,.14)"></i>Kosong</span><span><i style="background:rgba(230,160,30,.28)"></i>Ada tempahan</span><span><i style="opacity:.45"></i>Tarikh lepas</span></div>
+    <div class="det" id="cDet"></div>
+  </section>
+  <p class="note">Tempahan anda akan dimaklumkan kepada pegawai bertugas (person in charge) untuk tindakan lanjut.</p>
+</main>
 
-  <!-- Header & Hero Section -->
-  <header class="pattern-bg text-white shadow-lg relative overflow-hidden">
-    <div class="max-w-6xl mx-auto px-4 py-12 md:py-16 text-center relative z-10">
-      <div class="inline-flex items-center justify-center p-3 bg-emerald-700/60 rounded-full mb-4 ring-2 ring-emerald-400/40">
-        <i class="fa-solid fa-mosque text-3xl text-emerald-200"></i>
-      </div>
-      <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight text-white mb-3">
-        Sistem Tempahan Perkhidmatan di Pusat Islam USIM
-      </h1>
-      <p class="text-emerald-100 text-base md:text-lg max-w-2xl mx-auto font-light leading-relaxed">
-        Kemudahan pendaftaran perkhidmatan keagamaan dan kebajikan masyarakat. Sila pilih perkhidmatan di bawah untuk membuat tempahan.
-      </p>
-    </div>
-  </header>
-
-  <!-- Main Content: Services Grid -->
-  <main class="max-w-6xl mx-auto px-4 py-10 flex-grow w-full">
-    <div class="flex items-center justify-between mb-8 pb-4 border-b border-slate-200">
-      <div>
-        <h2 class="text-2xl font-bold text-slate-900">Pilihan Perkhidmatan</h2>
-        <p class="text-sm text-slate-500">Klik untuk mengisi borang permohonan. Disarankan permohonan dibuat pada waktu hari bekerja untuk memudahkan maklumbalas. Kekosongan tempahan boleh disemak di Kalendar (di akhir page).</p>
-      </div>
-    </div>
-
-    <!-- Perkhidmatan Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="servicesGrid">
-      
-      <!-- 1. Bacaan Tahlil dan Doa Selamat -->
-      <div onclick="openBookingForm('Bacaan Tahlil dan Doa Selamat', 'fa-book-quran', 'Tahlil ringkas atau lengkap serta doa selamat bagi kesyukuran, majlis hajat atau kenduri arwah.')" 
-           class="group bg-white rounded-2xl p-6 border border-slate-200 hover:border-emerald-500 shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col justify-between transform hover:-translate-y-1">
-        <div>
-          <div class="w-14 h-14 bg-emerald-50 rounded-xl flex items-center justify-center text-emerald-700 text-2xl mb-4 group-hover:bg-emerald-600 group-hover:text-white transition-colors duration-300 shadow-inner">
-            <i class="fa-solid fa-book-quran"></i>
-          </div>
-          <h3 class="text-xl font-bold text-slate-900 group-hover:text-emerald-700 transition-colors mb-2">
-            1. Bacaan Tahlil dan Doa Selamat
-          </h3>
-          <p class="text-slate-600 text-sm leading-relaxed mb-6">
-            Khidmat pimpinan bacaan tahlil arwah dan doa selamat bagi kesyukuran mahupun majlis keluarga.
-          </p>
-        </div>
-        <div class="flex items-center justify-between pt-4 border-t border-slate-100">
-          <span class="text-xs font-semibold px-2.5 py-1 bg-emerald-100 text-emerald-800 rounded-full">Tersedia</span>
-          <span class="text-sm font-semibold text-emerald-600 group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">
-            Tempah Sekarang <i class="fa-solid fa-arrow-right text-xs"></i>
-          </span>
-        </div>
-      </div>
-
-      <!-- 2. Bacaan Yasin -->
-      <div onclick="openBookingForm('Bacaan Yasin', 'fa-hands-praying', 'Pimpinan bacaan surah Yasin mingguan, doa selamat, atau program tahlil khusus.')" 
-           class="group bg-white rounded-2xl p-6 border border-slate-200 hover:border-teal-500 shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col justify-between transform hover:-translate-y-1">
-        <div>
-          <div class="w-14 h-14 bg-teal-50 rounded-xl flex items-center justify-center text-teal-700 text-2xl mb-4 group-hover:bg-teal-600 group-hover:text-white transition-colors duration-300 shadow-inner">
-            <i class="fa-solid fa-hands-praying"></i>
-          </div>
-          <h3 class="text-xl font-bold text-slate-900 group-hover:text-teal-700 transition-colors mb-2">
-            2. Bacaan Yasin
-          </h3>
-          <p class="text-slate-600 text-sm leading-relaxed mb-6">
-            Bimbingan dan pimpinan majlis bacaan Surah Yasin untuk keluarga, program komuniti atau permohonan hajat khusus.
-          </p>
-        </div>
-        <div class="flex items-center justify-between pt-4 border-t border-slate-100">
-          <span class="text-xs font-semibold px-2.5 py-1 bg-teal-100 text-teal-800 rounded-full">Tersedia</span>
-          <span class="text-sm font-semibold text-teal-600 group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">
-            Tempah Sekarang <i class="fa-solid fa-arrow-right text-xs"></i>
-          </span>
-        </div>
-      </div>
-
-      <!-- 3. Solat Hajat -->
-      <div onclick="openBookingForm('Solat Hajat', 'fa-person-praying', 'Pimpinan solat hajat berjemaah dan munajat doa khusus untuk peperiksaan, kesembuhan, atau sebarang hajat.')" 
-           class="group bg-white rounded-2xl p-6 border border-slate-200 hover:border-cyan-500 shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col justify-between transform hover:-translate-y-1">
-        <div>
-          <div class="w-14 h-14 bg-cyan-50 rounded-xl flex items-center justify-center text-cyan-700 text-2xl mb-4 group-hover:bg-cyan-600 group-hover:text-white transition-colors duration-300 shadow-inner">
-            <i class="fa-solid fa-person-praying"></i>
-          </div>
-          <h3 class="text-xl font-bold text-slate-900 group-hover:text-cyan-700 transition-colors mb-2">
-            3. Solat Hajat
-          </h3>
-          <p class="text-slate-600 text-sm leading-relaxed mb-6">
-            Bimbingan dan pimpinan solat sunat hajat secara berjemaah bersama doa munajat bagi peperiksaan, kesihatan atau urusan penting.
-          </p>
-        </div>
-        <div class="flex items-center justify-between pt-4 border-t border-slate-100">
-          <span class="text-xs font-semibold px-2.5 py-1 bg-cyan-100 text-cyan-800 rounded-full">Berjemaah</span>
-          <span class="text-sm font-semibold text-cyan-600 group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">
-            Tempah Sekarang <i class="fa-solid fa-arrow-right text-xs"></i>
-          </span>
-        </div>
-      </div>
-
-      <!-- 4. Majlis Tahniq -->
-      <div onclick="openBookingForm('Majlis Tahniq', 'fa-baby', 'Upacara sunnah mencukur rambut bayi, mentahniq (belah mulut), dan doa selamat.')" 
-           class="group bg-white rounded-2xl p-6 border border-slate-200 hover:border-amber-500 shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col justify-between transform hover:-translate-y-1">
-        <div>
-          <div class="w-14 h-14 bg-amber-50 rounded-xl flex items-center justify-center text-amber-700 text-2xl mb-4 group-hover:bg-amber-600 group-hover:text-white transition-colors duration-300 shadow-inner">
-            <i class="fa-solid fa-baby"></i>
-          </div>
-          <h3 class="text-xl font-bold text-slate-900 group-hover:text-amber-700 transition-colors mb-2">
-            4. Majlis Tahniq
-          </h3>
-          <p class="text-slate-600 text-sm leading-relaxed mb-6">
-            Pelaksanaan sunnah mencukur rambut bayi, amalan mentahniq buah kurma bersama doa keberkatan untuk anak baru lahir.
-          </p>
-        </div>
-        <div class="flex items-center justify-between pt-4 border-t border-slate-100">
-          <span class="text-xs font-semibold px-2.5 py-1 bg-amber-100 text-amber-800 rounded-full">Keluarga</span>
-          <span class="text-sm font-semibold text-amber-600 group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">
-            Tempah Sekarang <i class="fa-solid fa-arrow-right text-xs"></i>
-          </span>
-        </div>
-      </div>
-
-      <!-- 5. Ruqyah -->
-      <div onclick="openBookingForm('Ruqyah', 'fa-shield-halved', 'Rawatan perubatan Islam berasaskan ayat-ayat suci Al-Quran dan doa syifa.')" 
-           class="group bg-white rounded-2xl p-6 border border-slate-200 hover:border-indigo-500 shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col justify-between transform hover:-translate-y-1">
-        <div>
-          <div class="w-14 h-14 bg-indigo-50 rounded-xl flex items-center justify-center text-indigo-700 text-2xl mb-4 group-hover:bg-indigo-600 group-hover:text-white transition-colors duration-300 shadow-inner">
-            <i class="fa-solid fa-shield-halved"></i>
-          </div>
-          <h3 class="text-xl font-bold text-slate-900 group-hover:text-indigo-700 transition-colors mb-2">
-            5. Ruqyah 
-          </h3>
-          <p class="text-slate-600 text-sm leading-relaxed mb-6">
-            Sesi ikhtiar rawatan berasaskan ayat al-Quran bagi gangguan emosi, ketenangan jiwa, dan gangguan rohani.
-          </p>
-        </div>
-        <div class="flex items-center justify-between pt-4 border-t border-slate-100">
-          <span class="text-xs font-semibold px-2.5 py-1 bg-indigo-100 text-indigo-800 rounded-full">Temujanji Khusus</span>
-          <span class="text-sm font-semibold text-indigo-600 group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">
-            Tempah Sekarang <i class="fa-solid fa-arrow-right text-xs"></i>
-          </span>
-        </div>
-      </div>
-
-      <!-- 6. Pengurusan Jenazah -->
-      <div onclick="openBookingForm('Pengurusan Jenazah', 'fa-hand-holding-heart', 'Bantuan fardhu kifayah merangkumi pemandian, kafan, solat jenazah dan pengebumian.')" 
-           class="group bg-white rounded-2xl p-6 border border-slate-200 hover:border-rose-500 shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col justify-between transform hover:-translate-y-1">
-        <div>
-          <div class="w-14 h-14 bg-rose-50 rounded-xl flex items-center justify-center text-rose-700 text-2xl mb-4 group-hover:bg-rose-600 group-hover:text-white transition-colors duration-300 shadow-inner">
-            <i class="fa-solid fa-hand-holding-heart"></i>
-          </div>
-          <div class="flex items-center gap-2 mb-2">
-            <h3 class="text-xl font-bold text-slate-900 group-hover:text-rose-700 transition-colors">
-              6. Pengurusan Jenazah
-            </h3>
-          </div>
-          <p class="text-slate-600 text-sm leading-relaxed mb-6">
-            Bantuan fardhu kifayah meliputi bimbingan, khidmat mandian, khidmat kafan dan solat jenazah.
-          </p>
-        </div>
-        <div class="flex items-center justify-between pt-4 border-t border-slate-100">
-          <span class="text-xs font-semibold px-2.5 py-1 bg-rose-100 text-rose-800 rounded-full">Kecemasan / Harian</span>
-          <span class="text-sm font-semibold text-rose-600 group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">
-            Tempah Segera <i class="fa-solid fa-arrow-right text-xs"></i>
-          </span>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- Bahagian Kalendar & Jadual Tempahan (Live Sync Google Sheets) -->
-    <section class="mt-14 bg-white rounded-2xl border border-slate-200 shadow-sm p-6 md:p-8">
-      <div class="flex flex-col md:flex-row md:items-center justify-between pb-6 border-b border-slate-200 gap-4">
-        <div>
-          <div class="inline-flex items-center gap-2 px-3 py-1 bg-emerald-50 text-emerald-700 rounded-full text-xs font-semibold mb-2">
-            <span id="syncPulse" class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span id="syncStatusText">Menyambung ke Google Sheet...</span>
-          </div>
-          <h2 class="text-2xl font-bold text-slate-900 flex items-center gap-2">
-            <i class="fa-regular fa-calendar-check text-emerald-600"></i>
-            Kalendar Tempahan Semasa
-          </h2>
-          <p class="text-xs md:text-sm text-slate-500 mt-1">
-            Paparan jadual tempahan yang diselaraskan secara langsung.
-          </p>
-        </div>
-
-        <!-- Butang Kawalan Kalendar & Refresh -->
-        <div class="flex items-center gap-2">
-          <button onclick="fetchCalendarEvents()" class="inline-flex items-center gap-2 px-3.5 py-2 text-xs font-semibold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 rounded-xl transition border border-emerald-200 shadow-sm" title="Muat semula data langsung">
-            <i id="syncIcon" class="fa-solid fa-arrows-rotate"></i>
-            <span>Muat Semula</span>
-          </button>
-          <div class="inline-flex items-center rounded-xl border border-slate-200 bg-slate-50 p-1">
-            <button onclick="changeMonth(-1)" class="p-1.5 hover:bg-white text-slate-600 rounded-lg transition" title="Bulan Terdahulu">
-              <i class="fa-solid fa-chevron-left text-xs"></i>
-            </button>
-            <span id="currentMonthYearLabel" class="px-3 text-xs md:text-sm font-bold text-slate-800 min-w-[130px] text-center">
-              --
-            </span>
-            <button onclick="changeMonth(1)" class="p-1.5 hover:bg-white text-slate-600 rounded-lg transition" title="Bulan Seterusnya">
-              <i class="fa-solid fa-chevron-right text-xs"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Panel Notis Akses Google Sheet -->
-      <div id="connectionNotice" class="hidden my-4 p-4 bg-amber-50 border border-amber-300 rounded-xl text-xs text-amber-900 space-y-2">
-        <div class="flex items-start gap-2">
-          <i class="fa-solid fa-circle-exclamation text-amber-600 text-sm mt-0.5"></i>
-          <div>
-            <strong class="font-bold">Langkah Pengesahan Google Sheet:</strong>
-            <p id="connectionNoticeText" class="mt-1 leading-relaxed">
-              Data Google Sheet belum dapat diakses secara langsung. Sila pastikan spreadsheet mempunyai kebenaran akses awam:
-            </p>
-            <ol class="list-decimal list-inside mt-2 space-y-1 font-medium text-amber-800">
-              <li>Buka Google Sheet anda (<code class="bg-amber-100 px-1 py-0.5 rounded font-mono">1uPGDQ3lsb9K2D2htKFlz58OD8uIDT5SI2aY90rUkh0w</code>).</li>
-              <li>Klik butang <strong class="text-amber-950">Share (Kongsi)</strong> di penjuru atas kanan.</li>
-              <li>Tukar tetapan <strong class="text-amber-950">General access</strong> kepada <strong>"Anyone with the link"</strong> & tetapkan sebagai <strong>Viewer</strong>.</li>
-              <li>Tekan butang <strong>"Muat Semula"</strong> di atas.</li>
-            </ol>
-          </div>
-        </div>
-      </div>
-
-      <!-- Grid Kalendar & Senarai Terperinci -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mt-6">
-        <!-- Grid Kalendar (7 lajur) -->
-        <div class="lg:col-span-7 bg-slate-50/60 p-4 rounded-xl border border-slate-200/80">
-          <div class="grid grid-cols-7 text-center text-xs font-semibold text-slate-500 mb-2">
-            <span class="text-rose-500">Aha</span>
-            <span>Isn</span>
-            <span>Sel</span>
-            <span>Rab</span>
-            <span>Kha</span>
-            <span>Jum</span>
-            <span>Sab</span>
-          </div>
-          <div id="calendarGrid" class="grid grid-cols-7 gap-1 md:gap-1.5 text-xs">
-            <!-- Sel kalendar dijana secara dinamik oleh JavaScript -->
-          </div>
-        </div>
-
-        <!-- Senarai Jadual Tarikh Yang Dipilih -->
-        <div class="lg:col-span-5 flex flex-col justify-between bg-white border border-slate-200 rounded-xl p-4">
-          <div>
-            <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
-              <div>
-                <span class="text-[11px] font-semibold text-emerald-600 uppercase tracking-wider block">Maklumat Tarikh</span>
-                <h4 id="selectedDateHeader" class="text-sm font-bold text-slate-900">Pilih tarikh di kalendar</h4>
-              </div>
-              <span id="selectedDateBadge" class="text-[11px] font-semibold px-2.5 py-1 bg-slate-100 text-slate-600 rounded-full">
-                0 Tempahan
-              </span>
-            </div>
-
-            <!-- Senarai Kad Tempahan Hari Tersebut -->
-            <div id="eventsListForDate" class="space-y-2.5 max-h-[300px] overflow-y-auto pr-1">
-              <!-- Item tempahan dijana di sini -->
-            </div>
-          </div>
-
-          <div class="mt-4 pt-3 border-t border-slate-100 text-[11px] text-slate-400 flex items-center justify-between">
-            <span class="flex items-center gap-1.5">
-              <i class="fa-solid fa-cloud-arrow-down text-emerald-600"></i>
-              <span id="engineBadge">Enjin: Auto-Sync</span>
-            </span>
-            <span id="totalRecordCounter" class="font-mono text-slate-500">0 Rekod Diselaraskan</span>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- POP-UP 1: Borang Keperluan Tempahan -->
-  <div id="bookingModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop hidden overflow-y-auto">
-    <div class="bg-white rounded-2xl max-w-lg w-full p-6 md:p-8 shadow-2xl relative my-8 border border-slate-100 transition-all">
-      <button type="button" onclick="closeBookingModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 p-2 rounded-lg text-lg">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
-
-      <div class="flex items-center gap-3 mb-5">
-        <div id="modalIconContainer" class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center text-xl">
-          <i id="modalServiceIcon" class="fa-solid fa-mosque"></i>
-        </div>
-        <div>
-          <h3 class="text-xl font-bold text-slate-900 leading-snug">Borang Tempahan</h3>
-          <p id="modalServiceName" class="text-sm text-emerald-700 font-semibold"></p>
-        </div>
-      </div>
-
-      <form id="bookingForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
-        <input type="hidden" id="selectedService">
-
-        <!-- 1. Nama -->
-        <div>
-          <label for="custName" class="block text-sm font-medium text-slate-700 mb-1">
-            Nama Penuh Pemohon <span class="text-rose-500">*</span>
-          </label>
-          <div class="relative">
-            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400">
-              <i class="fa-regular fa-user"></i>
-            </span>
-            <input type="text" id="custName" required placeholder="Contoh: Muhammad Ali bin Ahmad"
-                   class="w-full pl-10 pr-3 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition text-sm">
-          </div>
-        </div>
-
-        <!-- 2. No. Telefon -->
-        <div>
-          <label for="custPhone" class="block text-sm font-medium text-slate-700 mb-1">
-            No. Telefon <span class="text-rose-500 font-bold">* (Wajib WhatsApp)</span>
-          </label>
-          <div class="relative">
-            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400">
-              <i class="fa-solid fa-phone"></i>
-            </span>
-            <input type="tel" id="custPhone" required placeholder="Contoh: 0123456789"
-                   pattern="[0-9\+\-\s]{9,15}"
-                   class="w-full pl-10 pr-3 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition text-sm">
-          </div>
-          <p class="text-xs text-slate-400 mt-1">Sila pastikan nombor boleh dihubungi terus melalui panggilan atau WhatsApp.</p>
-        </div>
-
-        <!-- 3. Tarikh Tempahan -->
-        <div>
-          <label for="custDate" class="block text-sm font-medium text-slate-700 mb-1">
-            Tarikh Tempahan / Majlis <span class="text-rose-500">*</span>
-          </label>
-          <div class="relative">
-            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400">
-              <i class="fa-regular fa-calendar-days"></i>
-            </span>
-            <input type="date" id="custDate" required
-                   class="w-full pl-10 pr-3 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition text-sm">
-          </div>
-        </div>
-
-        <!-- 4. Masa -->
-        <div>
-          <label for="custTime" class="block text-sm font-medium text-slate-700 mb-1">
-            Masa (Sekiranya spesifik, sila nyatakan di ruang catatan<span class="text-rose-500">*</span>
-          </label>
-          <div class="relative">
-            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400 pointer-events-none">
-              <i class="fa-regular fa-clock"></i>
-            </span>
-            <select id="custTime" required
-                    class="w-full pl-10 pr-8 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition text-sm bg-white cursor-pointer appearance-none">
-              <option value="" disabled selected>-- Sila Pilih Waktu --</option>
-              <option value="Selepas Jam 10.00 Pagi">Selepas Jam 10.00 Pagi</option>
-              <option value="Selepas Zohor">Selepas Zohor</option>
-              <option value="Selepas Asar">Selepas Asar</option>
-              <option value="Selepas Maghrib">Selepas Maghrib</option>
-              <option value="Selepas Isyak">Selepas Isyak</option>
-            </select>
-            <span class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 pointer-events-none text-xs">
-              <i class="fa-solid fa-chevron-down"></i>
-            </span>
-          </div>
-        </div>
-
-        <!-- Catatan Tambahan -->
-        <div>
-          <label for="custNotes" class="block text-sm font-medium text-slate-700 mb-1">
-            Catatan (Tujuan| Kepada Siapa| Masa Spesifik jika ada)
-          </label>
-          <textarea id="custNotes" rows="2" placeholder="Contoh: Bacaan yasin untuk kesihatan Amir, pada 4.50 pm..."
-                    class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition text-sm"></textarea>
-        </div>
-
-        <div class="pt-2 flex items-center justify-end gap-3">
-          <button type="button" onclick="closeBookingModal()"
-                  class="px-5 py-2.5 text-sm font-medium text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-xl transition">
-            Batal
-          </button>
-          <button type="submit"
-                  class="px-6 py-2.5 text-sm font-medium text-white bg-emerald-600 hover:bg-emerald-700 rounded-xl shadow-lg shadow-emerald-600/30 transition flex items-center gap-2">
-            <span>Simpan & Teruskan</span>
-            <i class="fa-solid fa-arrow-right"></i>
-          </button>
-        </div>
-      </form>
-    </div>
+<div class="ov" id="ovForm" role="dialog" aria-modal="true" aria-labelledby="fT">
+  <div class="md">
+    <h3 id="fT"></h3><p class="sub">Sila lengkapkan maklumat tempahan.</p>
+    <label for="nama">Nama <i>*</i></label><input id="nama" autocomplete="name" placeholder="Nama penuh"><div class="er" id="e_nama"></div>
+    <label for="tel">No. Telefon <i>* wajib</i></label><input id="tel" type="tel" inputmode="tel" autocomplete="tel" placeholder="cth: 012-3456789"><div class="er" id="e_tel"></div>
+    <label for="tarikh">Tarikh Tempahan / Bacaan <i>*</i></label><input id="tarikh" type="date"><div class="er" id="e_tarikh"></div>
+    <label for="masa">Masa <i>*</i></label><select id="masa" style="width:100%"><option value="">-- Pilih masa --</option><option>Selepas 10.00 Pagi</option><option>Selepas Zohor</option><option>Selepas Asar</option><option>Selepas Maghrib</option><option>Selepas Isya’</option></select><div class="er" id="e_masa"></div>
+    <label for="catatan">Catatan</label><textarea id="catatan" rows="3" maxlength="500" placeholder="Masukkan butiran tambahan (alamat, nama arwah, bilangan jemaah, dan lain-lain)"></textarea>
+    <div class="row"><button class="btn" id="bBatal">Batal</button><button class="btn p" id="bSimpan">Simpan</button></div>
   </div>
+</div>
 
-  <!-- POP-UP 2: Semakan Maklumat (Review Pop-up) -->
-  <div id="reviewModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop hidden overflow-y-auto">
-    <div class="bg-white rounded-2xl max-w-lg w-full p-6 md:p-8 shadow-2xl relative my-8 border border-slate-100">
-      
-      <div class="text-center mb-6">
-        <div class="w-16 h-16 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center text-2xl mx-auto mb-3">
-          <i class="fa-solid fa-clipboard-check"></i>
-        </div>
-        <h3 class="text-2xl font-bold text-slate-900">Pengesahan Akhir Maklumat</h3>
-        <p class="text-sm text-slate-500">Sila pastikan semua maklumat di bawah adalah tepat sebelum dihantar ke pengurusan Pusat Islam.</p>
-      </div>
-
-      <!-- Ringkasan Kad -->
-      <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 mb-6 space-y-3.5 text-sm">
-        <div class="flex justify-between items-start border-b border-slate-200/80 pb-2.5">
-          <span class="text-slate-500 font-medium">Perkhidmatan:</span>
-          <span id="revService" class="font-bold text-emerald-800 text-right"></span>
-        </div>
-        <div class="flex justify-between items-start border-b border-slate-200/80 pb-2.5">
-          <span class="text-slate-500 font-medium">Pegawai Bertugas (PIC):</span>
-          <span id="revPIC" class="font-semibold text-emerald-700 text-right"></span>
-        </div>
-        <div class="flex justify-between items-start border-b border-slate-200/80 pb-2.5">
-          <span class="text-slate-500 font-medium">Nama Pemohon:</span>
-          <span id="revName" class="font-semibold text-slate-800 text-right"></span>
-        </div>
-        <div class="flex justify-between items-start border-b border-slate-200/80 pb-2.5">
-          <span class="text-slate-500 font-medium">No. Telefon:</span>
-          <span id="revPhone" class="font-semibold text-emerald-700 text-right font-mono"></span>
-        </div>
-        <div class="flex justify-between items-start border-b border-slate-200/80 pb-2.5">
-          <span class="text-slate-500 font-medium">Tarikh Majlis:</span>
-          <span id="revDate" class="font-semibold text-slate-800 text-right"></span>
-        </div>
-        <div class="flex justify-between items-start border-b border-slate-200/80 pb-2.5">
-          <span class="text-slate-500 font-medium">Masa:</span>
-          <span id="revTime" class="font-semibold text-slate-800 text-right"></span>
-        </div>
-        <div class="flex justify-between items-start">
-          <span class="text-slate-500 font-medium">Catatan:</span>
-          <span id="revNotes" class="font-normal text-slate-700 text-right max-w-[240px] italic"></span>
-        </div>
-      </div>
-
-      <div class="flex flex-col sm:flex-row items-center gap-3">
-        <button type="button" onclick="backToEdit()"
-                class="w-full sm:w-1/2 px-4 py-2.5 text-sm font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-xl transition flex items-center justify-center gap-2">
-          <i class="fa-solid fa-pen-to-square"></i>
-          <span>Kemaskini / Ubah</span>
-        </button>
-        <button type="button" id="btnConfirmSubmit" onclick="submitFinalBooking()"
-                class="w-full sm:w-1/2 px-4 py-2.5 text-sm font-semibold text-white bg-emerald-600 hover:bg-emerald-700 rounded-xl shadow-lg shadow-emerald-600/30 transition flex items-center justify-center gap-2">
-          <i class="fa-solid fa-check-circle"></i>
-          <span id="btnSubmitText">Sahkan & Hantar</span>
-        </button>
-      </div>
-    </div>
+<div class="ov" id="ovRev" role="dialog" aria-modal="true" aria-labelledby="rT">
+  <div class="md">
+    <h3 id="rT">Semak Maklumat Tempahan</h3><p class="sub">Sila pastikan maklumat di bawah adalah betul sebelum disahkan.</p>
+    <dl id="rev"></dl>
+    <div class="row"><button class="btn" id="bEdit">Kembali / Ubah</button><button class="btn p" id="bSah">Sahkan Tempahan</button></div>
   </div>
+</div>
 
-  <!-- POP-UP 3: Status Berjaya -->
-  <div id="successModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop hidden overflow-y-auto">
-    <div class="bg-white rounded-2xl max-w-md w-full p-6 md:p-8 shadow-2xl relative text-center">
-      <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-3xl mx-auto mb-4">
-        <i class="fa-solid fa-circle-check"></i>
-      </div>
-      <h3 class="text-2xl font-bold text-slate-900 mb-2">Tempahan Berjaya Dihantar!</h3>
-      <p class="text-sm text-slate-600 mb-5 leading-relaxed">
-        Maklumat telah direkodkan ke sistem. Makluman telah dimajukan kepada Pegawai Bertugas (PIC) bagi perkhidmatan ini:
-      </p>
-
-      <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-4 text-xs text-left mb-4 space-y-2">
-        <div class="flex items-center gap-2 text-emerald-800 font-bold">
-          <i class="fa-solid fa-user-tie"></i>
-          <span id="successPicInfo">PIC: Ustaz Bertugas</span>
-        </div>
-        <p class="text-emerald-900">
-          Notifikasi sistem telah dijana untuk tindakan lanjut pihak pengurusan perkhidmatan.
-        </p>
-      </div>
-
-      <!-- Kotak Makluman Panggilan Pejabat -->
-      <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 text-xs text-left mb-5 flex items-start gap-3">
-        <div class="text-amber-600 text-base mt-0.5">
-          <i class="fa-solid fa-circle-exclamation"></i>
-        </div>
-        <div>
-          <span class="font-bold text-amber-900 block mb-0.5">Makluman Penting:</span>
-          <p class="text-amber-800 leading-relaxed">
-            Sila hubungi No. Pejabat di talian 
-            <a href="tel:067980225" class="font-bold underline text-amber-900 hover:text-amber-700">06-798 0225</a> 
-            sekiranya tiada maklum balas daripada penyelaras selepas 2 jam dari permohonan dibuat. (Hanya pada hari bekerja 9.00 pagi - 4.30 petang)
-          </p>
-        </div>
-      </div>
-
-      <div class="flex flex-col gap-3">
-        <a href="tel:067980225"
-           class="w-full px-4 py-3 text-sm font-bold text-white bg-emerald-600 hover:bg-emerald-700 rounded-xl shadow-md transition flex items-center justify-center gap-2">
-          <i class="fa-solid fa-phone"></i>
-          <span>Hubungi Pejabat: 06-798 0225</span>
-        </a>
-        <button type="button" onclick="closeSuccessModal()"
-                class="w-full px-4 py-2.5 text-sm font-medium text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-xl transition">
-          Selesai & Tutup
-        </button>
-      </div>
-    </div>
+<div class="ov" id="ovOk" role="dialog" aria-modal="true">
+  <div class="md ok">
+    <div class="e" id="okE">✅</div><h3 id="okT"></h3><p class="sub" id="okM"></p>
+    <div class="row"><button class="btn p" id="bTutup">Tutup</button></div>
   </div>
-
-  <!-- POP-UP 4: Modal Preview Tempahan Kalendar -->
-  <div id="calendarPreviewModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop hidden overflow-y-auto">
-    <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl relative my-8 border border-slate-100 transition-all">
-      <button type="button" onclick="closeCalendarPreviewModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 p-2 rounded-lg text-lg">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
-
-      <div class="flex items-center gap-3 mb-4 pb-3 border-b border-slate-100">
-        <div class="w-11 h-11 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center text-lg">
-          <i class="fa-solid fa-calendar-check"></i>
-        </div>
-        <div>
-          <h3 class="text-lg font-bold text-slate-900 leading-snug">Preview Tempahan</h3>
-          <p id="previewModalDateHeader" class="text-xs text-emerald-700 font-semibold"></p>
-        </div>
-      </div>
-
-      <!-- Senarai ringkas perincian tempahan -->
-      <div id="previewModalList" class="space-y-3 max-h-[360px] overflow-y-auto pr-1">
-        <!-- Dimasukkan secara dinamik -->
-      </div>
-
-      <div class="mt-5 pt-3 border-t border-slate-100 flex items-center justify-end">
-        <button type="button" onclick="closeCalendarPreviewModal()"
-                class="px-5 py-2 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-xl transition">
-          Tutup
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Footer -->
-  <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500 mt-12">
-    <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-3">
-      <div class="flex items-center gap-2">
-        <i class="fa-solid fa-moon text-emerald-600"></i>
-        <span class="font-semibold text-slate-700">Sistem Tempahan & Pendaftaran Perkhidmatan di Pusat Islam USIM</span>
-      </div>
-      <div>
-        <span>Kompleks Islam Tuanku Muhriz (KITM) USIM.</span>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Application Logic JavaScript -->
-  <script>
-    // Konfigurasi Pentadbir
-    const CONFIG = {
-      sheetUrl: "https://script.google.com/macros/s/AKfycby3Q2Rt8vJ-XtU8euByTcAFnRnuyS53FcPd2KOW4gqocJd1aTLwFkEQJYQs02l88ir1/exec",
-      sheetId: "1uPGDQ3lsb9K2D2htKFlz58OD8uIDT5SI2aY90rUkh0w", 
-      sheetGid: "0",
-
-      pics: {
-        "Bacaan Tahlil dan Doa Selamat": {
-          nama: "Ustaz Amirolridzuan",
-          email: "wan.noraizuddin@usim.edu.my",
-          telefon: "60123456701"
-        },
-        "Bacaan Yasin": {
-          nama: "Ustaz Amirolridzuan",
-          email: "wan.noraizuddin@usim.edu.my",
-          telefon: "60123456702"
-        },
-        "Solat Hajat": {
-          nama: "Ustaz Amirolridzuan",
-          email: "wan.noraizuddin@usim.edu.my",
-          telefon: "60123456706"
-        },
-        "Majlis Tahniq": {
-          nama: "Ustaz Fathi",
-          email: "wan.noraizuddin@usim.edu.my",
-          telefon: "60123456705"
-        },
-        "Ruqyah": {
-          nama: "Ustaz Fathi",
-          email: "wan.noraizuddin@usim.edu.my",
-          telefon: "60123456704"
-        },
-        "Pengurusan Jenazah": {
-          nama: "Ustaz Fathi",
-          email: "wan.noraizuddin@usim.edu.my",
-          telefon: "60123456703"
-        }
-      }
-    };
-
-    let currentBooking = {
-      service: "",
-      name: "",
-      phone: "",
-      date: "",
-      time: "",
-      notes: "",
-      assignedPIC: null
-    };
-
-    let calendarDate = new Date();
-    let selectedDateString = new Date().toISOString().split('T')[0];
-    let allCalendarBookings = [];
-
-    // Fungsi pembersihan & penyeragaman nama PIC (mengelakkan paparan emel)
-    function resolvePICName(rawPIC, serviceName) {
-      const trimmedService = (serviceName || "").trim();
-      const matchedConfig = CONFIG.pics[trimmedService];
-
-      // Jika ada konfigurasi perkhidmatan dan rawPIC kosong atau mengandungi format emel
-      if (rawPIC && typeof rawPIC === 'string') {
-        const clean = rawPIC.trim();
-        // Jika rawPIC ialah emel (mengandungi @), semak sama ada ia sepadan dengan senarai PIC
-        if (clean.includes("@")) {
-          for (const key in CONFIG.pics) {
-            if (CONFIG.pics[key].email && CONFIG.pics[key].email.toLowerCase() === clean.toLowerCase()) {
-              return CONFIG.pics[key].nama;
-            }
-          }
-          // Jika tiada padanan emel langsung, guna nama PIC perkhidmatan jika ada
-          if (matchedConfig && matchedConfig.nama) {
-            return matchedConfig.nama;
-          }
-        } else if (clean.length > 0) {
-          return clean; // Memang nama penuh
-        }
-      }
-
-      // Default jika tiada atau emel tidak dikenali
-      return matchedConfig ? matchedConfig.nama : "Pusat Islam USIM";
-    }
-
-    // Fungsi pembersihan & penyeragaman format tarikh
-    function cleanDate(raw) {
-      if (!raw) return "";
-      let s = String(raw).trim().replace(/['"]/g, '');
-
-      if (s.includes("T")) s = s.split("T")[0];
-
-      if (s.includes("/")) {
-        let p = s.split("/");
-        if (p.length === 3) {
-          let day = p[0].padStart(2, "0");
-          let month = p[1].padStart(2, "0");
-          let year = p[2].length === 2 ? "20" + p[2] : p[2];
-          return `${year}-${month}-${day}`;
-        }
-      }
-
-      if (s.includes("-")) {
-        let p = s.split("-");
-        if (p.length === 3) {
-          if (p[0].length === 4) {
-            return `${p[0]}-${p[1].padStart(2, "0")}-${p[2].padStart(2, "0")}`;
-          } else if (p[2].length === 4) {
-            return `${p[2]}-${p[1].padStart(2, "0")}-${p[0].padStart(2, "0")}`;
-          }
-        }
-      }
-      return s;
-    }
-
-    // Parser CSV ringkas
-    function parseCSVLine(line) {
-      const result = [];
-      let current = '';
-      let inQuotes = false;
-      for (let i = 0; i < line.length; i++) {
-        const c = line[i];
-        if (c === '"') {
-          inQuotes = !inQuotes;
-        } else if (c === ',' && !inQuotes) {
-          result.push(current.trim());
-          current = '';
-        } else {
-          current += c;
-        }
-      }
-      result.push(current.trim());
-      return result;
-    }
-
-    // Penarikan jadual dari Google Sheet
-    async function fetchCalendarEvents() {
-      const icon = document.getElementById('syncIcon');
-      if (icon) icon.classList.add('fa-spin');
-      
-      const statusText = document.getElementById('syncStatusText');
-      if (statusText) statusText.innerText = "Refreshing...";
-
-      // Kaedah 1: CSV Export
-      if (CONFIG.sheetId && CONFIG.sheetId.trim().length > 15) {
-        try {
-          const csvUrl = `https://docs.google.com/spreadsheets/d/${CONFIG.sheetId.trim()}/export?format=csv&id=${CONFIG.sheetId.trim()}&gid=${CONFIG.sheetGid || 0}&_t=${Date.now()}`;
-          const res = await fetch(csvUrl, { cache: "no-store" });
-          
-          if (res.ok) {
-            const csvText = await res.text();
-            if (csvText && csvText.length > 20) {
-              const rows = csvText.split(/\r?\n/).filter(r => r.trim().length > 0);
-              
-              if (rows.length >= 2) {
-                const headerRow = parseCSVLine(rows[0]).map(h => h.toLowerCase());
-                
-                let dateIdx = 4;
-                let serviceIdx = 1;
-                let picIdx = 7;
-                let timeIdx = 5;
-
-                headerRow.forEach((colName, idx) => {
-                  if (colName.includes("tarikh") || colName.includes("date")) dateIdx = idx;
-                  if (colName.includes("perkhidmatan") || colName.includes("service")) serviceIdx = idx;
-                  if (colName.includes("pic") || colName.includes("pegawai")) picIdx = idx;
-                  if (colName.includes("masa") || colName.includes("time")) timeIdx = idx;
-                });
-
-                const parsedRecords = [];
-                for (let i = 1; i < rows.length; i++) {
-                  const cols = parseCSVLine(rows[i]);
-                  if (!cols || cols.length <= dateIdx) continue;
-
-                  const rawTarikh = cols[dateIdx];
-                  const normDate = cleanDate(rawTarikh);
-                  const svcName = cols[serviceIdx] || "Tempahan Perkhidmatan";
-                  const resolvedPIC = resolvePICName(cols[picIdx], svcName);
-
-                  if (normDate && normDate.length >= 8) {
-                    parsedRecords.push({
-                      tarikh: normDate,
-                      perkhidmatan: svcName,
-                      masa: cols[timeIdx] || "Waktu Ditetapkan",
-                      picNama: resolvedPIC,
-                      status: "Telah direkodkan"
-                    });
-                  }
-                }
-
-                if (parsedRecords.length > 0) {
-                  document.getElementById('engineBadge').innerText = "Disedia dan Diselia oleh En. W. Noraizuddin";
-                  renderFetchedRecords(parsedRecords);
-                  return;
-                }
-              }
-            }
-          }
-        } catch (csvError) {
-          console.warn("Cubaan CSV terus menemui ralat:", csvError);
-        }
-      }
-
-      // Kaedah 2: Fallback Visualization API
-      if (CONFIG.sheetId) {
-        tryFallbackVizApi();
-        return;
-      }
-
-      handleSyncFailure();
-    }
-
-    function tryFallbackVizApi() {
-      const oldScript = document.getElementById('vizScriptNode');
-      if (oldScript) oldScript.remove();
-
-      window.onVizResponse = function(resp) {
-        if (resp && resp.table && resp.table.rows) {
-          const records = [];
-          resp.table.rows.forEach(r => {
-            if (r.c && r.c[4]) {
-              const rawDate = r.c[4].f || r.c[4].v;
-              const normDate = cleanDate(rawDate);
-              const svcName = r.c[1] ? (r.c[1].v || "Perkhidmatan") : "Perkhidmatan";
-              const rawPicVal = r.c[7] ? (r.c[7].v || "") : "";
-              const resolvedPIC = resolvePICName(rawPicVal, svcName);
-
-              if (normDate) {
-                records.push({
-                  tarikh: normDate,
-                  perkhidmatan: svcName,
-                  masa: r.c[5] ? (r.c[5].v || "Masa Ditetapkan") : "Masa Ditetapkan",
-                  picNama: resolvedPIC,
-                  status: "Telah direkodkan"
-                });
-              }
-            }
-          });
-
-          if (records.length > 0) {
-            document.getElementById('engineBadge').innerText = "Disedia dan Diselia oleh En. W. Noraizuddin";
-            renderFetchedRecords(records);
-            return;
-          }
-        }
-        handleSyncFailure();
-      };
-
-      const s = document.createElement('script');
-      s.id = 'vizScriptNode';
-      s.src = `https://docs.google.com/spreadsheets/d/${CONFIG.sheetId}/gviz/tq?tqx=responseHandler:onVizResponse&_t=${Date.now()}`;
-      s.onerror = () => handleSyncFailure();
-      document.body.appendChild(s);
-    }
-
-    function renderFetchedRecords(records) {
-      allCalendarBookings = records;
-      
-      const icon = document.getElementById('syncIcon');
-      if (icon) icon.classList.remove('fa-spin');
-
-      const statusText = document.getElementById('syncStatusText');
-      if (statusText) statusText.innerText = `Diselaraskan: ${records.length} tempahan aktif`;
-
-      const counter = document.getElementById('totalRecordCounter');
-      if (counter) counter.innerText = `${records.length} Rekod Diselaraskan`;
-
-      const notice = document.getElementById('connectionNotice');
-      if (notice) notice.classList.add('hidden');
-
-      renderCalendar();
-      renderSelectedDateEvents();
-    }
-
-    function handleSyncFailure() {
-      const icon = document.getElementById('syncIcon');
-      if (icon) icon.classList.remove('fa-spin');
-
-      const statusText = document.getElementById('syncStatusText');
-      if (statusText) statusText.innerText = "Perlu kebenaran akses Sheet (Lihat panduan)";
-
-      const notice = document.getElementById('connectionNotice');
-      if (notice) notice.classList.remove('hidden');
-
-      renderCalendar();
-      renderSelectedDateEvents();
-    }
-
-    function changeMonth(direction) {
-      calendarDate.setMonth(calendarDate.getMonth() + direction);
-      renderCalendar();
-    }
-
-    function renderCalendar() {
-      const year = calendarDate.getFullYear();
-      const month = calendarDate.getMonth();
-
-      const monthNames = [
-        "Januari", "Februari", "Mac", "April", "Mei", "Jun",
-        "Julai", "Ogos", "September", "Oktober", "November", "Disember"
-      ];
-
-      document.getElementById('currentMonthYearLabel').innerText = `${monthNames[month]} ${year}`;
-
-      const firstDayIndex = new Date(year, month, 1).getDay();
-      const lastDay = new Date(year, month + 1, 0).getDate();
-      const prevLastDay = new Date(year, month, 0).getDate();
-
-      const calendarGrid = document.getElementById('calendarGrid');
-      calendarGrid.innerHTML = '';
-
-      // Hari bulan sebelumnya
-      for (let x = firstDayIndex; x > 0; x--) {
-        const dayNum = prevLastDay - x + 1;
-        const cell = document.createElement('div');
-        cell.className = "h-14 p-1 rounded-lg border border-transparent text-slate-300 flex flex-col items-center justify-start opacity-40 select-none";
-        cell.innerHTML = `<span>${dayNum}</span>`;
-        calendarGrid.appendChild(cell);
-      }
-
-      const todayString = new Date().toISOString().split('T')[0];
-
-      // Hari bulan semasa
-      for (let i = 1; i <= lastDay; i++) {
-        const dayString = `${year}-${String(month + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
-        const hasEvents = allCalendarBookings.filter(b => b.tarikh === dayString);
-
-        const isToday = dayString === todayString;
-        const isSelected = dayString === selectedDateString;
-
-        const cell = document.createElement('div');
-        cell.onclick = () => selectCalendarDate(dayString);
-        
-        let borderClasses = "border border-slate-200/70 hover:border-emerald-500 bg-white";
-        
-        // Warnakan kotak hijau jika terdapat tempahan
-        if (hasEvents.length > 0) {
-          if (isSelected) {
-            borderClasses = "border-2 border-emerald-700 bg-emerald-200/80 shadow-md ring-2 ring-emerald-500/30";
-          } else {
-            borderClasses = "border border-emerald-400 bg-emerald-100/70 hover:bg-emerald-200/70 text-emerald-950 shadow-sm";
-          }
-        } else if (isSelected) {
-          borderClasses = "border-2 border-emerald-600 bg-emerald-50/50 shadow-sm";
-        }
-
-        cell.className = `h-14 p-1 rounded-xl cursor-pointer transition flex flex-col items-center justify-between ${borderClasses}`;
-        
-        let textColor = hasEvents.length > 0 ? 'text-emerald-950 font-bold' : 'text-slate-700';
-        let numBadge = `<span class="text-[11px] font-semibold ${isToday ? 'w-5 h-5 flex items-center justify-center bg-emerald-700 text-white rounded-full' : textColor}">${i}</span>`;
-        
-        let dotIndicator = "";
-        if (hasEvents.length > 0) {
-          dotIndicator = `
-            <div class="flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-emerald-600 text-white text-[9px] font-bold shadow-xs">
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-200 animate-pulse"></span>
-              <span>${hasEvents.length}</span>
-            </div>
-          `;
-        }
-
-        cell.innerHTML = `
-          ${numBadge}
-          ${dotIndicator}
-        `;
-        calendarGrid.appendChild(cell);
-      }
-    }
-
-    function selectCalendarDate(dateStr) {
-      selectedDateString = dateStr;
-      renderCalendar();
-      renderSelectedDateEvents();
-
-      // Buka pop-up preview jika tarikh yang ditekan mempunyai tempahan
-      const events = allCalendarBookings.filter(b => b.tarikh === dateStr);
-      if (events.length > 0) {
-        openCalendarPreviewModal(dateStr, events);
-      }
-    }
-
-    // Modal Preview Kalendar
-    function openCalendarPreviewModal(dateStr, events) {
-      const modal = document.getElementById('calendarPreviewModal');
-      const header = document.getElementById('previewModalDateHeader');
-      const listContainer = document.getElementById('previewModalList');
-
-      try {
-        const parts = dateStr.split('-');
-        const dateObj = new Date(parts[0], parts[1] - 1, parts[2]);
-        const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
-        header.innerText = `${dateObj.toLocaleDateString('ms-MY', options)} (${events.length} Tempahan)`;
-      } catch (e) {
-        header.innerText = `${dateStr} (${events.length} Tempahan)`;
-      }
-
-      listContainer.innerHTML = '';
-      events.forEach((ev, idx) => {
-        const card = document.createElement('div');
-        card.className = "p-3.5 rounded-xl border border-emerald-200/80 bg-emerald-50/40 space-y-1.5 text-xs";
-        card.innerHTML = `
-          <div class="flex items-center justify-between">
-            <span class="font-bold text-slate-900 text-sm flex items-center gap-1.5">
-              <span class="w-2 h-2 rounded-full bg-emerald-600"></span>
-              ${ev.perkhidmatan}
-            </span>
-            <span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-semibold text-[10px]">
-              ${ev.status || 'Telah direkodkan'}
-            </span>
-          </div>
-          <div class="text-slate-600 flex items-center gap-1.5">
-            <i class="fa-regular fa-clock text-emerald-600"></i>
-            <span><strong>Masa:</strong> ${ev.masa}</span>
-          </div>
-          <div class="text-slate-600 flex items-center gap-1.5">
-            <i class="fa-solid fa-user-tie text-slate-400"></i>
-            <span><strong>PIC:</strong> ${ev.picNama || 'Pusat Islam USIM'}</span>
-          </div>
-        `;
-        listContainer.appendChild(card);
-      });
-
-      modal.classList.remove('hidden');
-    }
-
-    function closeCalendarPreviewModal() {
-      const modal = document.getElementById('calendarPreviewModal');
-      if (modal) modal.classList.add('hidden');
-    }
-
-    function renderSelectedDateEvents() {
-      const listContainer = document.getElementById('eventsListForDate');
-      const badge = document.getElementById('selectedDateBadge');
-      const header = document.getElementById('selectedDateHeader');
-
-      try {
-        const parts = selectedDateString.split('-');
-        const dateObj = new Date(parts[0], parts[1] - 1, parts[2]);
-        const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
-        header.innerText = dateObj.toLocaleDateString('ms-MY', options);
-      } catch (e) {
-        header.innerText = selectedDateString;
-      }
-
-      const events = allCalendarBookings.filter(b => b.tarikh === selectedDateString);
-      badge.innerText = `${events.length} Tempahan`;
-
-      if (events.length === 0) {
-        listContainer.innerHTML = `
-          <div class="text-center py-8 text-slate-400 bg-slate-50/50 rounded-xl border border-dashed border-slate-200">
-            <i class="fa-regular fa-calendar-xmark text-2xl mb-1 text-slate-300"></i>
-            <p class="text-xs">Tiada tempahan berjadual pada tarikh ini.</p>
-          </div>
-        `;
-        return;
-      }
-
-      listContainer.innerHTML = '';
-      events.forEach((ev) => {
-        const item = document.createElement('div');
-        item.className = "p-3 rounded-xl border border-slate-200 bg-slate-50/60 hover:bg-slate-50 transition flex items-start justify-between gap-2 shadow-sm";
-        item.innerHTML = `
-          <div>
-            <div class="flex items-center gap-2 mb-1">
-              <span class="w-2 h-2 rounded-full bg-emerald-600"></span>
-              <h5 class="text-xs font-bold text-slate-900">${ev.perkhidmatan}</h5>
-            </div>
-            <p class="text-[11px] text-slate-600 flex items-center gap-1.5 mb-1">
-              <i class="fa-regular fa-clock text-emerald-600"></i>
-              <span>${ev.masa}</span>
-            </p>
-            <p class="text-[10px] text-slate-500">
-              <i class="fa-solid fa-user-tie mr-1 text-slate-400"></i>PIC: ${ev.picNama || 'Pusat Islam USIM'}
-            </p>
-          </div>
-          <span class="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">
-            ${ev.status || 'Telah direkodkan'}
-          </span>
-        `;
-        listContainer.appendChild(item);
-      });
-    }
-
-    // Modal Borang Tempahan
-    function openBookingForm(serviceName, iconClass, description) {
-      currentBooking.service = serviceName;
-      currentBooking.assignedPIC = CONFIG.pics[serviceName] || {
-        nama: "Pegawai Bertugas Pusat Islam",
-        email: "pusatislam@masjid.gov.my",
-        telefon: "60123456789"
-      };
-
-      document.getElementById('selectedService').value = serviceName;
-      document.getElementById('modalServiceName').innerText = `${serviceName} (PIC: ${currentBooking.assignedPIC.nama})`;
-      document.getElementById('modalServiceIcon').className = `fa-solid ${iconClass}`;
-      
-      const today = new Date().toISOString().split('T')[0];
-      document.getElementById('custDate').min = today;
-
-      document.getElementById('bookingModal').classList.remove('hidden');
-    }
-
-    function closeBookingModal() {
-      document.getElementById('bookingModal').classList.add('hidden');
-    }
-
-    function handleFormSubmit(event) {
-      event.preventDefault();
-      
-      currentBooking.name = document.getElementById('custName').value.trim();
-      currentBooking.phone = document.getElementById('custPhone').value.trim();
-      currentBooking.date = document.getElementById('custDate').value;
-      currentBooking.time = document.getElementById('custTime').value;
-      currentBooking.notes = document.getElementById('custNotes').value.trim() || "- Tiada -";
-
-      document.getElementById('revService').innerText = currentBooking.service;
-      document.getElementById('revPIC').innerText = currentBooking.assignedPIC.nama;
-      document.getElementById('revName').innerText = currentBooking.name;
-      document.getElementById('revPhone').innerText = currentBooking.phone;
-      
-      try {
-        const parts = currentBooking.date.split('-');
-        const dateObj = new Date(parts[0], parts[1] - 1, parts[2]);
-        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        document.getElementById('revDate').innerText = dateObj.toLocaleDateString('ms-MY', options);
-      } catch (e) {
-        document.getElementById('revDate').innerText = currentBooking.date;
-      }
-
-      document.getElementById('revTime').innerText = currentBooking.time;
-      document.getElementById('revNotes').innerText = currentBooking.notes;
-
-      closeBookingModal();
-      document.getElementById('reviewModal').classList.remove('hidden');
-    }
-
-    function backToEdit() {
-      document.getElementById('reviewModal').classList.add('hidden');
-      document.getElementById('bookingModal').classList.remove('hidden');
-    }
-
-    // Penghantaran Tempahan
-    async function submitFinalBooking() {
-      const btnSubmit = document.getElementById('btnConfirmSubmit');
-      const btnText = document.getElementById('btnSubmitText');
-      
-      btnSubmit.disabled = true;
-      btnText.innerText = "Menghantar...";
-
-      const payload = {
-        perkhidmatan: currentBooking.service,
-        nama: currentBooking.name,
-        telefon: currentBooking.phone,
-        tarikh: currentBooking.date,
-        masa: currentBooking.time,
-        catatan: currentBooking.notes,
-        picNama: currentBooking.assignedPIC.nama,
-        picEmail: currentBooking.assignedPIC.email,
-        picPhone: currentBooking.assignedPIC.telefon,
-        masaDihantar: new Date().toISOString()
-      };
-
-      try {
-        if (CONFIG.sheetUrl && CONFIG.sheetUrl.startsWith('http')) {
-          await fetch(CONFIG.sheetUrl, {
-            method: 'POST',
-            mode: 'no-cors',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(payload)
-          });
-        }
-      } catch (error) {
-        console.warn("Nota simpanan webhook:", error);
-      } finally {
-        allCalendarBookings.push({
-          tarikh: currentBooking.date,
-          perkhidmatan: currentBooking.service,
-          masa: currentBooking.time,
-          picNama: currentBooking.assignedPIC.nama,
-          status: "Telah direkodkan"
-        });
-
-        selectedDateString = currentBooking.date;
-        renderCalendar();
-        renderSelectedDateEvents();
-
-        btnSubmit.disabled = false;
-        btnText.innerText = "Sahkan & Hantar";
-
-        document.getElementById('reviewModal').classList.add('hidden');
-        showSuccessModal();
-        document.getElementById('bookingForm').reset();
-      }
-    }
-
-    function showSuccessModal() {
-      const modal = document.getElementById('successModal');
-      const pic = currentBooking.assignedPIC;
-      document.getElementById('successPicInfo').innerText = `PIC: ${pic.nama}`;
-      modal.classList.remove('hidden');
-    }
-
-    function closeSuccessModal() {
-      document.getElementById('successModal').classList.add('hidden');
-    }
-
-    window.addEventListener('DOMContentLoaded', () => {
-      fetchCalendarEvents();
-    });
-  </script>
+</div>
+
+<script>
+// Selepas deploy Google Apps Script sebagai Web App, tampal URL di sini.
+var APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycby2gyg2Pu5wykETGq5q1yGcE9eiSTp9GMpQ6sLzotEONt47Y9KFrUpGwWYvelsGJRY/exec";
+
+var SERVICES=[
+ {id:"tahlil",e:"🌙",n:"Bacaan Tahlil dan Doa Selamat",d:"Majlis tahlil dan doa selamat untuk keluarga."},
+ {id:"yasin",e:"📖",n:"Bacaan Yasin",d:"Bacaan Surah Yasin atas permintaan."},
+ {id:"tahnik",e:"👶",n:"Majlis Tahniq",d:"Majlis tahnik bayi yang baru lahir."},
+ {id:"hajat",e:"🤲",n:"Solat Hajat",d:"Solat sunat hajat berjemaah dan doa memohon hajat."},
+ {id:"ruqyah",e:"🌿",n:"Ruqyah",d:"Rawatan Islam mengikut kaedah syar’i."},
+ {id:"jenazah",e:"☪️",n:"Pengurusan Jenazah",d:"Mandi, kafan, solat dan pengebumian jenazah."}
+];
+var MASA=["Selepas 10.00 Pagi","Selepas Zohor","Selepas Asar","Selepas Maghrib","Selepas Isya’"];
+var cur=null,data=null;
+var $=function(i){return document.getElementById(i)};
+var grid=$("grid");
+SERVICES.forEach(function(s){
+  var b=document.createElement("button");b.className="svc";
+  b.innerHTML='<div class="e">'+s.e+'</div><h2>'+s.n+'</h2><span>Tempah sekarang →</span>';
+  b.onclick=function(){openForm(s)};grid.appendChild(b);
+});
+function show(id,on){$(id).classList.toggle("on",on);document.body.style.overflow=document.querySelector(".ov.on")?"hidden":""}
+function today(){var d=new Date();d.setMinutes(d.getMinutes()-d.getTimezoneOffset());return d.toISOString().slice(0,10)}
+function openForm(s,pd){
+  cur=s;$("fT").textContent=s.e+" "+s.n;$("tarikh").min=today();
+  if(!data||data.svc!==s.id){["nama","tel","tarikh","masa","catatan"].forEach(function(k){$(k).value=""})}
+  clearErr();if(pd)$("tarikh").value=pd;show("ovForm",true);if(!matchMedia("(pointer:coarse)").matches)$("nama").focus();
+}
+function clearErr(){["nama","tel","tarikh","masa"].forEach(function(k){$("e_"+k).textContent="";$(k).classList.remove("bad")})}
+function err(k,m){$("e_"+k).textContent=m;$(k).classList.add("bad")}
+function validate(){
+  clearErr();var ok=true;
+  var n=$("nama").value.trim(),t=$("tel").value.trim(),d=$("tarikh").value,m=$("masa").value;
+  if(!n){err("nama","Sila isi nama.");ok=false}
+  if(!t){err("tel","No. telefon wajib diisi.");ok=false}
+  else if(!/^\+?[0-9\s-]{9,15}$/.test(t)){err("tel","Format no. telefon tidak sah.");ok=false}
+  if(!d){err("tarikh","Sila pilih tarikh.");ok=false}
+  else if(d<today()){err("tarikh","Tarikh tidak boleh lepas.");ok=false}
+  if(!m){err("masa","Sila pilih masa.");ok=false}
+  if(m&&d&&isTaken(cur.id,d,m)){err("masa","Slot masa ini sudah ditempah. Sila pilih masa lain.");ok=false}
+  return ok?{svc:cur.id,perkhidmatan:cur.n,nama:n,telefon:t,tarikh:d,masa:m,catatan:$("catatan").value.trim()}:null;
+}
+function fmtDate(d){var p=d.split("-");return p[2]+"/"+p[1]+"/"+p[0]}
+$("bBatal").onclick=function(){data=null;show("ovForm",false)};
+$("bSimpan").onclick=function(){
+  var v=validate();if(!v)return;data=v;
+  var rows=[["Perkhidmatan",v.perkhidmatan],["Nama",v.nama],["No. Telefon",v.telefon],["Tarikh",fmtDate(v.tarikh)],["Masa",v.masa],["Catatan",v.catatan||"-"]];
+  var dl=$("rev");dl.innerHTML="";
+  rows.forEach(function(r){var d=document.createElement("div"),a=document.createElement("dt"),b=document.createElement("dd");a.textContent=r[0];b.textContent=r[1];d.appendChild(a);d.appendChild(b);dl.appendChild(d)});
+  show("ovForm",false);show("ovRev",true);
+};
+$("bEdit").onclick=function(){show("ovRev",false);show("ovForm",true)};
+$("bSah").onclick=function(){
+  var btn=$("bSah");btn.disabled=true;btn.textContent="Menghantar…";
+  var payload=Object.assign({},data,{dihantar:new Date().toISOString()});
+  var done=function(saved){
+    btn.disabled=false;btn.textContent="Sahkan Tempahan";show("ovRev",false);
+    $("okE").textContent=saved?"✅":"⚠️";
+    $("okT").textContent=saved?"Tempahan Berjaya Direkodkan":"Tempahan Belum Dihantar";
+    $("okM").textContent=saved?"Terima kasih, "+payload.nama+". Pegawai bertugas akan menghubungi anda di "+payload.telefon+".":"Sambungan ke Google Sheet belum dikonfigurasi, jadi tempahan ini belum sampai kepada pegawai bertugas.";
+    show("ovOk",true);if(saved||!APPS_SCRIPT_URL)addBooking(payload);data=null;
+  };
+  if(!APPS_SCRIPT_URL){
+    try{var a=JSON.parse(localStorage.getItem("tempahan")||"[]");a.push(payload);localStorage.setItem("tempahan",JSON.stringify(a))}catch(e){}
+    setTimeout(function(){done(false)},400);return;
+  }
+  fetch(APPS_SCRIPT_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload)})
+    .then(function(){done(true)}).catch(function(){done(false)});
+};
+$("bTutup").onclick=function(){show("ovOk",false)};
+var MN=["Januari","Februari","Mac","April","Mei","Jun","Julai","Ogos","September","Oktober","November","Disember"];
+var nw=new Date(),cy=nw.getFullYear(),cm=nw.getMonth(),filt="all",sel=null,B=[];
+function pad(n){return n<10?"0"+n:""+n}
+function sObj(id){for(var i=0;i<SERVICES.length;i++)if(SERVICES[i].id===id)return SERVICES[i];return {id:id,n:id}}
+function isTaken(s,d,m){return B.some(function(b){return b.svc===s&&b.tarikh===d&&b.masa===m})}
+function dayList(ds){return B.filter(function(b){return b.tarikh===ds&&(filt==="all"||b.svc===filt)}).sort(function(a,b){return MASA.indexOf(a.masa)-MASA.indexOf(b.masa)})}
+function addBooking(p){B.push({svc:p.svc,tarikh:p.tarikh,masa:p.masa});renderCal()}
+var cF=$("cFilt");
+[["all","Semua perkhidmatan"]].concat(SERVICES.map(function(s){return [s.id,s.n]})).forEach(function(o){var op=document.createElement("option");op.value=o[0];op.textContent=o[1];cF.appendChild(op)});
+cF.onchange=function(){filt=cF.value;renderCal()};
+$("cPrev").onclick=function(){cm--;if(cm<0){cm=11;cy--}renderCal()};
+$("cNext").onclick=function(){cm++;if(cm>11){cm=0;cy++}renderCal()};
+function renderCal(){
+  $("cTit").textContent=MN[cm]+" "+cy;
+  var g=$("cGrid"),t=today();g.innerHTML="";
+  ["Ahd","Isn","Sel","Rab","Kha","Jum","Sab"].forEach(function(h){var e=document.createElement("div");e.className="wd";e.textContent=h;g.appendChild(e)});
+  var first=new Date(cy,cm,1).getDay(),n=new Date(cy,cm+1,0).getDate();
+  for(var i=0;i<first;i++)g.appendChild(document.createElement("div"));
+  for(var k=1;k<=n;k++){(function(k){
+    var ds=cy+"-"+pad(cm+1)+"-"+pad(k),c=dayList(ds).length,b=document.createElement("button");
+    b.className="dy"+(c?" has":"")+(ds<t?" past":"")+(ds===t?" tdy":"")+(ds===sel?" sel":"");
+    b.innerHTML="<b>"+k+"</b><small>"+(c?c+'<span class="tx"> tempahan</span>':'<span class="tx">Kosong</span>')+"</small>";
+    b.onclick=function(){sel=ds;renderCal()};g.appendChild(b)})(k)}
+  renderDet();
+}
+function renderDet(){
+  var el=$("cDet");el.innerHTML="";
+  if(!sel){el.textContent="Klik mana-mana tarikh untuk melihat masa yang telah ditempah.";return}
+  var L=dayList(sel),h=document.createElement("strong");h.textContent=fmtDate(sel);el.appendChild(h);
+  if(!L.length){var p=document.createElement("div");p.textContent="Tiada tempahan. Tarikh ini masih kosong.";el.appendChild(p)}
+  else{var ul=document.createElement("ul");L.forEach(function(b){var li=document.createElement("li");li.textContent=b.masa+" - "+(filt==="all"?sObj(b.svc).n:"Telah ditempah");ul.appendChild(li)});el.appendChild(ul)}
+  if(sel>=today()){
+    if(filt!=="all"){var bt=document.createElement("button");bt.className="btn p";bt.textContent="Tempah pada tarikh ini";bt.onclick=function(){openForm(sObj(filt),sel)};el.appendChild(bt)}
+    else{var hn=document.createElement("div");hn.style.cssText="color:var(--mut);font-size:13px;margin-top:6px";hn.textContent="Pilih perkhidmatan pada penapis di atas untuk menempah tarikh ini.";el.appendChild(hn)}
+  }
+}
+function loadB(){
+  if(APPS_SCRIPT_URL){
+    fetch(APPS_SCRIPT_URL).then(function(r){return r.json()}).then(function(j){B=j;renderCal()}).catch(function(){renderCal()});
+  }else{
+    try{B=JSON.parse(localStorage.getItem("tempahan")||"[]")}catch(e){B=[]}
+    renderCal();
+  }
+}
+loadB();
+document.addEventListener("keydown",function(e){if(e.key==="Escape"){show("ovForm",false)}});
+</script>
 </body>
 </html>
