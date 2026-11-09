@@ -96,8 +96,8 @@ dl div{flex-direction:column;gap:2px}dd{text-align:left}
 <body>
 <header>
   <div class="ic">🕌</div>
-  <h1>Sistem Tempahan Perkhidmatan di Pusat Islam</h1>
-  <p>Pilih perkhidmatan di bawah untuk membuat tempahan</p>
+  <h1>Sistem Tempahan Perkhidmatan di Pusat Islam USIM</h1>
+  <p>Klik untuk mengisi borang permohonan. Disarankan permohonan dibuat pada waktu hari bekerja untuk memudahkan maklumbalas. Kekosongan tempahan boleh disemak di Kalendar (di akhir page).</p>
 </header>
 <main>
   <div class="grid" id="grid"></div>
@@ -109,7 +109,7 @@ dl div{flex-direction:column;gap:2px}dd{text-align:left}
     <div class="leg"><span><i style="background:rgba(52,211,153,.14)"></i>Kosong</span><span><i style="background:rgba(230,160,30,.28)"></i>Ada tempahan</span><span><i style="opacity:.45"></i>Tarikh lepas</span></div>
     <div class="det" id="cDet"></div>
   </section>
-  <p class="note">Tempahan anda akan dimaklumkan kepada pegawai bertugas (person in charge) untuk tindakan lanjut.</p>
+  <p class="note">Tempahan anda akan dimaklumkan kepada pegawai bertugas untuk tindakan lanjut.</p>
 </main>
 
 <div class="ov" id="ovForm" role="dialog" aria-modal="true" aria-labelledby="fT">
@@ -119,7 +119,7 @@ dl div{flex-direction:column;gap:2px}dd{text-align:left}
     <label for="tel">No. Telefon <i>* wajib</i></label><input id="tel" type="tel" inputmode="tel" autocomplete="tel" placeholder="cth: 012-3456789"><div class="er" id="e_tel"></div>
     <label for="tarikh">Tarikh Tempahan / Bacaan <i>*</i></label><input id="tarikh" type="date"><div class="er" id="e_tarikh"></div>
     <label for="masa">Masa <i>*</i></label><select id="masa" style="width:100%"><option value="">-- Pilih masa --</option><option>Selepas 10.00 Pagi</option><option>Selepas Zohor</option><option>Selepas Asar</option><option>Selepas Maghrib</option><option>Selepas Isya’</option></select><div class="er" id="e_masa"></div>
-    <label for="catatan">Catatan</label><textarea id="catatan" rows="3" maxlength="500" placeholder="Masukkan butiran tambahan (alamat, nama arwah, bilangan jemaah, dan lain-lain)"></textarea>
+    <label for="catatan">Catatan</label><textarea id="catatan" rows="3" maxlength="500" placeholder="(Masukkan Tujuan/ Kepada Siapa / Masa Spesifik jika ada)"></textarea>
     <div class="row"><button class="btn" id="bBatal">Batal</button><button class="btn p" id="bSimpan">Simpan</button></div>
   </div>
 </div>
@@ -198,7 +198,7 @@ $("bSah").onclick=function(){
     btn.disabled=false;btn.textContent="Sahkan Tempahan";show("ovRev",false);
     $("okE").textContent=saved?"✅":"⚠️";
     $("okT").textContent=saved?"Tempahan Berjaya Direkodkan":"Tempahan Belum Dihantar";
-    $("okM").textContent=saved?"Terima kasih, "+payload.nama+". Pegawai bertugas akan menghubungi anda di "+payload.telefon+".":"Sambungan ke Google Sheet belum dikonfigurasi, jadi tempahan ini belum sampai kepada pegawai bertugas.";
+    $("okM").textContent=saved?"Terima kasih, "+payload.nama+". Pegawai bertugas akan menghubungi anda di "+payload.telefon+".Sekiranya tidak mendapat maklumbalas selepas 2 jam, sila hubungi pejabat di talian 06-7980225.":"Sambungan ke Google Sheet belum dikonfigurasi, jadi tempahan ini belum sampai kepada pegawai bertugas.";
     show("ovOk",true);if(saved||!APPS_SCRIPT_URL)addBooking(payload);data=null;
   };
   if(!APPS_SCRIPT_URL){
